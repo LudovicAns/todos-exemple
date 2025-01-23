@@ -1,18 +1,23 @@
-import TodoForm from './composants/TodoForm'
-import TodosList from './composants/TodosList'
-import TodosProvider from './composants/TodosProvider'
 import './index.css'
+import {Route, Routes} from "react-router";
+import Todos from "./pages/Todos.jsx";
+import AuthLayout from "./layouts/AuthLayout.jsx";
+import Home from "./pages/Home.jsx";
+import Register from "./pages/auth/Register.jsx";
+
 function App() {
 
-  return (
-    <main className='bg-neutral-800 h-screen'>
-      <h1 className='text-2xl text-neutral-200 text-center p-4'>Todo App</h1>
-      <TodosProvider>
-        <TodoForm />
-        <TodosList />
-      </TodosProvider>
-    </main>
-  )
+    return (
+        <Routes>
+            <Route index element={<Home/>}/>
+
+            <Route element={<AuthLayout/>}>
+                <Route path={`register`} element={<Register/>}></Route>
+            </Route>
+
+            <Route path={`todos`} element={<Todos/>}/>
+        </Routes>
+    );
 }
 
 export default App
