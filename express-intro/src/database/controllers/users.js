@@ -1,16 +1,18 @@
 import express from "express";
-import {UserRepository} from "./database/repository/user-repository.js";
+import {UserRepository} from "../repository/user-repository.js";
 import bcrypt from "bcrypt";
-import {saltRounds} from "./crypto/bcrypt-utils.js";
+import {saltRounds} from "../../crypto/bcrypt-utils.js";
+import {registerValidation} from "../../validations/users.js";
 
 export const usersRouter = express.Router();
 
-// ============== ENDPOINTS ============== //
 usersRouter.post('/register', async (req, rep) => {
     const {email, password, avatarURL} = req.body;
 
-    if (!email || !password) {
-        rep.status(400).json({message: "Email and password are required"});
+    const validateUser = registerValidation(req.body);
+
+    if (!validateUser.success) {
+        rep.status(400).json({message: JSON.parse(validateUser.error.message)[0].message});
         return;
     }
 
@@ -45,5 +47,3 @@ usersRouter.post('/register', async (req, rep) => {
         }
     })
 });
-
-// ============== MIDDLEWARES ============== //

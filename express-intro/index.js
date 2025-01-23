@@ -1,8 +1,8 @@
 import express from "express";
-import { todosRouteur } from "./src/todos.js";
-import { connectToDatabase } from "./src/database/index.js";
-import {usersRouter} from "./src/users.js";
+import {todosRouteur} from "./src/database/controllers/todos.js";
+import {connectToDatabase} from "./src/database/index.js";
 import dotenv from "dotenv";
+import {usersRouter} from "./src/database/controllers/users.js";
 
 dotenv.config();
 

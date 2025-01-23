@@ -1,5 +1,5 @@
 import express from "express";
-import { TodoRepository } from "./database/repository/todo-repository.js";
+import { TodoRepository } from "../repository/todo-repository.js";
 
 export const todosRouteur = express.Router();
 
