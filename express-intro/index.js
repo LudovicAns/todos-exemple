@@ -1,7 +1,10 @@
 import express from "express";
 import { todosRouteur } from "./src/todos.js";
 import { connectToDatabase } from "./src/database/index.js";
+import {usersRouter} from "./src/users.js";
+import dotenv from "dotenv";
 
+dotenv.config();
 
 const PORT = 5000;
 
@@ -23,6 +26,7 @@ app.use(loggerMiddleware);
 
 // Utilisation du middleware native d'express pour le routing
 app.use("/api/todos", todosRouteur);
+app.use("/api/users", usersRouter);
 
 app.listen(PORT, () => {
     console.log(`Serveur lancé sur http://localhost:${PORT}`);
